@@ -15,6 +15,7 @@ interface TelemetryPanelProps {
   zoom: number;
   mousePosition: { lat: number; lng: number } | null;
   roiBounds: BoundingBox | null;
+  roiType: "bounding-box" | "polygon" | null;
   isAnalyzing: boolean;
   activeAgent: string | null;
 }
@@ -50,6 +51,7 @@ export default function TelemetryPanel({
   zoom,
   mousePosition,
   roiBounds,
+  roiType,
   isAnalyzing,
   activeAgent,
 }: TelemetryPanelProps) {
@@ -105,7 +107,7 @@ export default function TelemetryPanel({
             <DataRow label="East" value={roiBounds.east.toFixed(4) + "°"} />
             <DataRow label="West" value={roiBounds.west.toFixed(4) + "°"} />
             <div className="mt-2 px-2 py-1 rounded-md bg-cyan-50/80 border border-cyan-200/50 text-[10px] font-mono text-cyan-700 text-center">
-              ROI ACTIVE — {((roiBounds.north - roiBounds.south) * 111).toFixed(1)} × {((roiBounds.east - roiBounds.west) * 111 * Math.cos((roiBounds.north * Math.PI) / 180)).toFixed(1)} km
+              ROI ACTIVE ({roiType === "polygon" ? "polygon" : "rectangle"}) — {((roiBounds.north - roiBounds.south) * 111).toFixed(1)} × {((roiBounds.east - roiBounds.west) * 111 * Math.cos((roiBounds.north * Math.PI) / 180)).toFixed(1)} km
             </div>
           </>
         ) : (

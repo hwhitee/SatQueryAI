@@ -5,7 +5,8 @@ import { useNavigate } from "react-router";
 import { Button } from "@/components/ui/button";
 import TelemetryPanel from "@/components/telemetry/TelemetryPanel";
 import ChatPanel from "@/components/chat/ChatPanel";
-import type { BoundingBox, GeoPoint, GeoPolygon } from "@/lib/satquery-types";
+import type { Roi, GeoPoint, GeoPolygon } from "@/lib/satquery-types";
+import { roiToBounds } from "@/lib/satquery-types";
 
 // Dynamic import for Leaflet components (no SSR)
 const MapViewer = lazy(() => import("@/components/map/MapViewer"));
@@ -24,7 +25,7 @@ function MapFallback() {
 export default function Dashboard() {
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
-  const [roiBounds, setRoiBounds] = useState<BoundingBox | null>(null);
+  const [roi, setRoi] = useState<Roi | null>(null);
   const [mapCenter, setMapCenter] = useState<[number, number]>([20.5, 78.9]);
   const [mapZoom, setMapZoom] = useState(5);
   const [mousePosition, setMousePosition] = useState<{ lat: number; lng: number } | null>(null);
@@ -33,8 +34,10 @@ export default function Dashboard() {
   const [geoPoints, setGeoPoints] = useState<GeoPoint[]>([]);
   const [floodPolygon, setFloodPolygon] = useState<GeoPolygon | null>(null);
 
-  const handleBoundsChange = useCallback((bounds: BoundingBox | null) => {
-    setRoiBounds(bounds);
+  const roiBounds = roi ? roiToBounds(roi) : null;
+
+  const handleRoiChange = useCallback((newRoi: Roi | null) => {
+    setRoi(newRoi);
   }, []);
 
   const handleGeoDataReceived = useCallback((points: GeoPoint[], polygon: GeoPolygon | null) => {
@@ -102,6 +105,7 @@ export default function Dashboard() {
             zoom={mapZoom}
             mousePosition={mousePosition}
             roiBounds={roiBounds}
+            roiType={roi?.type ?? null}
             isAnalyzing={isAnalyzing}
             activeAgent={activeAgent}
           />
@@ -111,11 +115,11 @@ export default function Dashboard() {
         <main className="flex-1 relative bg-slate-100 overflow-hidden">
           <Suspense fallback={<MapFallback />}>
             <MapViewer
-              onBoundsChange={handleBoundsChange}
+              onRoiChange={handleRoiChange}
               onZoomChange={setMapZoom}
               onCenterChange={setMapCenter}
               onMousePositionChange={setMousePosition}
-              roiBounds={roiBounds}
+              roi={roi}
               geoPoints={geoPoints}
               floodPolygon={floodPolygon}
             />

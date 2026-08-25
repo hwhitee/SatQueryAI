@@ -28,11 +28,31 @@ export const AGENTS: Record<AgentType, AgentInfo> = {
   },
 };
 
+export type DrawMode = "rectangle" | "polygon" | null;
+
 export interface BoundingBox {
   north: number;
   south: number;
   east: number;
   west: number;
+}
+
+export interface RoiRegion {
+  type: "bounding-box";
+  bounds: BoundingBox;
+}
+
+export interface RoiPolygon {
+  type: "polygon";
+  points: GeoPoint[];
+  bounds: BoundingBox;
+}
+
+export type Roi = RoiRegion | RoiPolygon;
+
+/** Derive a bounding box from any ROI */
+export function roiToBounds(roi: Roi): BoundingBox {
+  return roi.bounds;
 }
 
 export interface GeoPoint {
