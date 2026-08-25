@@ -62,7 +62,7 @@ function MessageBubble({ message }: { message: ChatMessage }) {
         {/* Name + badge row */}
         <div className={cn("flex items-center gap-1.5", isUser ? "flex-row-reverse" : "")}>
           <span className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider">
-            {isUser ? "Analyst" : "SatQuery AI"}
+            {isUser ? "Operator" : "SatQueryAI"}
           </span>
           {!isUser && message.agent && <AgentBadge agent={message.agent} />}
         </div>
@@ -128,7 +128,7 @@ export default function ChatPanel({
       id: "welcome",
       role: "assistant",
       content:
-        "SatQuery AI ready. Draw a Region of Interest on the map and ask me anything about that area.\n\n**Try asking:**\n• \"Count the buildings here\"\n• \"Detect flood changes\"\n• \"What terrain is this?\"",
+        "SatQueryAI is ready. Draw a Region of Interest on the map, then ask a question about that area.\n\n**Example queries:**\n\u2022 \"Count the structures in this region\"\n\u2022 \"Detect recent flood activity\"\n\u2022 \"Classify the terrain type\"",
       timestamp: Date.now(),
     },
   ]);
@@ -222,7 +222,7 @@ export default function ChatPanel({
       {
         id: "welcome",
         role: "assistant",
-        content: "Chat cleared. Ready for new analysis.",
+        content:        "Session cleared. Ready for a new analysis.",
         timestamp: Date.now(),
       },
     ]);
@@ -281,7 +281,7 @@ export default function ChatPanel({
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder={roiBounds ? "Ask about this region..." : "Draw ROI first, then ask..."}
+              placeholder={roiBounds ? "Ask about the selected region..." : "Draw a region on the map first..."}
               disabled={isProcessing}
               className={cn(
                 "w-full pl-8 pr-3 py-2.5 rounded-xl text-[13px] font-mono",

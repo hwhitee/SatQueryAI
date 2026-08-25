@@ -60,10 +60,10 @@ export default function TelemetryPanel({
       {/* Mission Header */}
       <div className="text-center pb-3 border-b border-slate-200/50">
         <div className="text-[9px] uppercase tracking-[0.3em] text-cyan-500/80 mb-1">
-          ISRO • Space Application Centre
+          SatQueryAI • Geospatial Intelligence
         </div>
         <h2 className="text-sm font-bold text-slate-800 tracking-tight">
-          SatQuery Telemetry
+          Session Telemetry
         </h2>
         <div className="text-[10px] font-mono text-slate-400 mt-0.5">
           Session {Date.now().toString(36).toUpperCase()}
@@ -88,7 +88,7 @@ export default function TelemetryPanel({
           </>
         ) : (
           <div className="text-[10px] text-slate-400 font-mono py-1">
-            Hover over map to track...
+            Hover over the map to track cursor...
           </div>
         )}
       </div>
@@ -108,7 +108,7 @@ export default function TelemetryPanel({
           </>
         ) : (
           <div className="text-[10px] text-slate-400 font-mono py-1">
-            Draw a rectangle on the map...
+            Draw a bounding box on the map...
           </div>
         )}
       </div>

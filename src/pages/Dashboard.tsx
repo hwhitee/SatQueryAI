@@ -66,10 +66,10 @@ export default function Dashboard() {
           </div>
           <div>
             <h1 className="text-sm font-bold text-slate-800 tracking-tight leading-none">
-              SatQuery AI
+              SatQuery<span className="text-cyan-600">AI</span>
             </h1>
             <p className="text-[9px] font-mono text-slate-400 tracking-wider uppercase">
-              ISRO Multimodal Remote Sensing Assistant
+              Geospatial Intelligence Platform
             </p>
           </div>
         </div>
@@ -78,7 +78,7 @@ export default function Dashboard() {
           <div className="hidden sm:flex items-center gap-1.5 px-2 py-1 rounded-md bg-slate-100/80 border border-slate-200/50">
             <div className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
             <span className="text-[10px] font-mono text-slate-500">
-              {user?.name || "Analyst"}
+              {user?.name || "Operator"}
             </span>
           </div>
           <Button

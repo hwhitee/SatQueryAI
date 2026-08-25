@@ -7,56 +7,65 @@ import {
   Brain,
   Layers,
   ArrowRight,
-  Zap,
   Shield,
   Globe,
   ChevronRight,
   Box,
   Activity,
+  CheckCircle2,
 } from "lucide-react";
 
 const FEATURES = [
   {
     icon: Box,
-    title: "Draw & Query",
-    desc: "Draw a bounding box on any satellite map and ask natural language questions about that region.",
+    title: "Draw and Query",
+    desc: "Define any Region of Interest on a satellite map and ask natural language questions about that area — no GIS expertise required.",
   },
   {
     icon: Brain,
-    title: "Multi-Agent AI",
-    desc: "Your query is intelligently routed to specialized models: object detection, change detection, or vision-language.",
+    title: "Multi-Agent Intelligence",
+    desc: "Queries are automatically routed to specialized AI models for object detection, change analysis, or terrain classification.",
   },
   {
     icon: Layers,
-    title: "GeoJSON Viz",
-    desc: "Results are rendered as interactive map overlays — detection points, flood polygons, and terrain classifications.",
+    title: "Geospatial Overlays",
+    desc: "Results are rendered as interactive map layers — detection points, flood extent polygons, and spectral classification data.",
   },
   {
     icon: Activity,
-    title: "Real-Time Telemetry",
-    desc: "Live viewport coordinates, zoom level, sensor metadata, and agent processing status in a command center dashboard.",
+    title: "Live Telemetry Dashboard",
+    desc: "Viewport coordinates, sensor metadata, agent processing status, and session analytics displayed in real time.",
   },
 ];
 
-const DEMO_STEPS = [
+const STEPS = [
   {
     step: "01",
-    title: "Draw ROI",
-    desc: "Select a Region of Interest on the satellite map",
+    title: "Define the Region",
+    desc: "Draw a bounding box on the satellite map to select your area of interest.",
     icon: Map,
   },
   {
     step: "02",
-    title: "Ask Anything",
-    desc: "Type natural language queries about the area",
+    title: "Ask in Plain Language",
+    desc: "Type questions about the region using everyday language — the system handles the rest.",
     icon: Brain,
   },
   {
     step: "03",
-    title: "See Results",
-    desc: "View AI-powered analysis overlaid on the map",
+    title: "Review the Analysis",
+    desc: "Receive AI-powered insights overlaid directly on the map with full supporting metadata.",
     icon: Layers,
   },
+];
+
+const CAPABILITIES = [
+  "Structure detection and counting",
+  "Flood and water body analysis",
+  "Terrain and land-use classification",
+  "Multi-spectral band processing",
+  "Temporal change detection",
+  "Real-time GeoJSON export",
 ];
 
 export default function Landing() {
@@ -86,17 +95,16 @@ export default function Landing() {
           <div className="flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 shadow-md shadow-cyan-500/20">
             <Satellite className="w-5 h-5 text-white" />
           </div>
-          <div>
-            <span className="text-base font-bold text-slate-800 tracking-tight">SatQuery</span>
-            <span className="text-base font-bold text-cyan-600 tracking-tight ml-0.5">AI</span>
-          </div>
+          <span className="text-base font-bold text-slate-800 tracking-tight">
+            SatQuery<span className="text-cyan-600">AI</span>
+          </span>
         </div>
         <div className="flex items-center gap-3">
           <button
             onClick={handleCTA}
             className="px-4 py-2 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 shadow-md shadow-cyan-500/20 hover:shadow-lg hover:shadow-cyan-500/30 transition-all duration-300 flex items-center gap-1.5"
           >
-            {isAuthenticated ? "Dashboard" : "Get Started"}
+            {isAuthenticated ? "Open Platform" : "Request Access"}
             <ArrowRight className="w-3.5 h-3.5" />
           </button>
         </div>
@@ -110,8 +118,8 @@ export default function Landing() {
           transition={{ duration: 0.6 }}
         >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/60 backdrop-blur-sm border border-cyan-200/50 text-[11px] font-semibold text-cyan-700 uppercase tracking-widest mb-6 shadow-sm">
-            <Zap className="w-3 h-3" />
-            Built for ISRO Analysts
+            <Shield className="w-3 h-3" />
+            Enterprise Geospatial Intelligence
           </div>
         </motion.div>
 
@@ -121,12 +129,10 @@ export default function Landing() {
           transition={{ duration: 0.7, delay: 0.1 }}
           className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.1] max-w-4xl"
         >
-          Chat with{" "}
+          Satellite Analysis{" "}
           <span className="bg-gradient-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent">
-            Satellite Imagery
+            as a Conversation
           </span>
-          <br />
-          Using Natural Language
         </motion.h1>
 
         <motion.p
@@ -135,8 +141,9 @@ export default function Landing() {
           transition={{ duration: 0.6, delay: 0.25 }}
           className="mt-6 text-base sm:text-lg text-slate-500 max-w-2xl leading-relaxed"
         >
-          Draw a bounding box on a map. Ask a question. Get instant AI-powered analysis
-          from specialized geospatial models — no code, no datasets, no PhD required.
+          Select any region on Earth. Ask a question in plain language. Receive
+          instant analysis powered by specialized geospatial AI models — built for
+          teams that need answers, not pipelines.
         </motion.p>
 
         <motion.div
@@ -149,12 +156,12 @@ export default function Landing() {
             onClick={handleCTA}
             className="group px-6 py-3 rounded-xl text-sm font-bold text-white bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 shadow-lg shadow-cyan-500/25 hover:shadow-xl hover:shadow-cyan-500/30 transition-all duration-300 flex items-center gap-2"
           >
-            Launch Command Center
+            Open the Platform
             <ChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
           </button>
           <div className="flex items-center gap-2 text-xs text-slate-400">
             <Shield className="w-3.5 h-3.5" />
-            <span className="font-mono">Open source • Keyless • Free tiles</span>
+            <span className="font-mono">No API keys required</span>
           </div>
         </motion.div>
 
@@ -215,15 +222,15 @@ export default function Landing() {
             className="text-center mb-14"
           >
             <h2 className="text-2xl sm:text-3xl font-bold text-slate-800 tracking-tight">
-              How it works
+              Three steps to insight
             </h2>
             <p className="mt-3 text-sm text-slate-500 max-w-lg mx-auto">
-              Three steps from raw satellite imagery to actionable intelligence.
+              From raw satellite imagery to actionable intelligence in under a minute.
             </p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {DEMO_STEPS.map((s, i) => (
+            {STEPS.map((s, i) => (
               <motion.div
                 key={s.step}
                 initial={{ opacity: 0, y: 20 }}
@@ -246,7 +253,7 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Features */}
+      {/* Features + Capabilities */}
       <section className="relative z-10 px-6 py-20">
         <div className="max-w-5xl mx-auto">
           <motion.div
@@ -257,14 +264,14 @@ export default function Landing() {
             className="text-center mb-14"
           >
             <h2 className="text-2xl sm:text-3xl font-bold text-slate-800 tracking-tight">
-              Core capabilities
+              Built for geospatial teams
             </h2>
             <p className="mt-3 text-sm text-slate-500 max-w-lg mx-auto">
-              An agentic Vision-RAG architecture purpose-built for geospatial analysis.
+              A purpose-built agentic architecture that turns satellite imagery into structured, queryable intelligence.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
             {FEATURES.map((f, i) => (
               <motion.div
                 key={f.title}
@@ -284,6 +291,24 @@ export default function Landing() {
               </motion.div>
             ))}
           </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="glass-card rounded-2xl p-6"
+          >
+            <h3 className="text-sm font-bold text-slate-800 mb-3">Supported analyses</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              {CAPABILITIES.map((cap) => (
+                <div key={cap} className="flex items-center gap-2 text-[13px] text-slate-500">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-cyan-500 flex-shrink-0" />
+                  {cap}
+                </div>
+              ))}
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -298,17 +323,17 @@ export default function Landing() {
         >
           <Globe className="w-10 h-10 text-cyan-500 mx-auto mb-4" />
           <h2 className="text-2xl sm:text-3xl font-bold text-slate-800 tracking-tight mb-3">
-            Ready to analyze your first region?
+            Ready to get started?
           </h2>
           <p className="text-sm text-slate-500 mb-6 max-w-md mx-auto">
-            Draw a bounding box, ask a question, and get AI-powered geospatial
-            insights in seconds.
+            Select a region, ask a question, and receive structured geospatial
+            analysis powered by specialized AI models.
           </p>
           <button
             onClick={handleCTA}
             className="px-6 py-3 rounded-xl text-sm font-bold text-white bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 shadow-lg shadow-cyan-500/25 transition-all duration-300"
           >
-            Launch SatQuery AI
+            Open SatQueryAI
           </button>
         </motion.div>
       </section>
@@ -318,11 +343,13 @@ export default function Landing() {
         <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="flex items-center gap-2">
             <Satellite className="w-4 h-4 text-cyan-500" />
-            <span className="text-xs font-semibold text-slate-600">SatQuery AI</span>
+            <span className="text-xs font-semibold text-slate-600">
+              SatQuery<span className="text-cyan-600">AI</span>
+            </span>
             <span className="text-[10px] text-slate-400 font-mono">v1.0</span>
           </div>
           <p className="text-[10px] text-slate-400 font-mono">
-            Indian Space Research Organisation • Space Applications Centre
+            Geospatial Intelligence Platform
           </p>
         </div>
       </footer>

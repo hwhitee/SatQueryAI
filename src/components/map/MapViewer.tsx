@@ -269,7 +269,7 @@ export default function MapViewer({
           <div className="glass-card px-4 py-2 flex items-center gap-2 shadow-lg">
             <div className="h-2 w-2 rounded-full bg-emerald-500" />
             <span className="text-[11px] font-mono text-slate-600">
-              ROI Locked — ask a question in the chat panel
+              ROI locked — enter a query in the chat panel
             </span>
           </div>
         </div>
@@ -278,7 +278,7 @@ export default function MapViewer({
       {/* Map overlay label */}
       <div className="absolute bottom-3 left-3 z-[1000] pointer-events-none">
         <div className="glass-panel px-3 py-1.5 text-[10px] font-mono tracking-wider text-slate-500/80 uppercase">
-          OpenStreetMap • ROI Analysis Mode
+          OpenStreetMap • SatQueryAI Analysis Mode
         </div>
       </div>
     </div>

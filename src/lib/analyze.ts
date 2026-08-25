@@ -61,9 +61,9 @@ function detectAgent(
     return {
       agent: "object-detection",
       thinkingSteps: [
-        "Routing query to YOLO-Geospatial Agent...",
+        "Dispatching to YOLO-Geospatial agent...",
         "Clipping satellite tiles to bounding box...",
-        "Running inference on 512x512 patches...",
+        "Running inference on 512×512 patches...",
         "Aggregating detections across tiles...",
         "Generating GeoJSON point features...",
       ],
@@ -82,9 +82,9 @@ function detectAgent(
     return {
       agent: "change-detection",
       thinkingSteps: [
-        "Routing query to Siamese Change-Detection VLM...",
-        "Fetching pre-monsoon reference tiles...",
-        "Fetching post-monsoon analysis tiles...",
+        "Dispatching to Siamese change-detection agent...",
+        "Fetching pre-event reference tiles...",
+        "Fetching post-event analysis tiles...",
         "Computing spectral difference map...",
         "Segmenting water body polygons...",
       ],
@@ -93,7 +93,7 @@ function detectAgent(
   return {
     agent: "vlm",
     thinkingSteps: [
-      "Routing query to Qwen Vision-Language Model...",
+      "Dispatching to Qwen vision-language agent...",
       "Extracting multispectral bands for ROI...",
       "Computing NDVI and spectral indices...",
       "Generating terrain classification...",
@@ -107,7 +107,7 @@ function buildObjectDetectionResponse(
   const count = Math.floor(randomInRange(28, 58));
   return {
     agent: "object-detection",
-    message: `Routed to YOLO-Geospatial Agent. Detected **${count} structures** in the selected Region of Interest (ROI). Confidence threshold: 0.72. All detections above 70% confidence have been mapped to GeoJSON point features.`,
+    message: `Object Detection agent completed. **${count} structures** identified within the selected Region of Interest.\n\nConfidence threshold: 0.72. All detections above 70% have been mapped to GeoJSON point features and are visible on the map.`,
     thinkingSteps: [],
     geoData: {
       type: "points",
@@ -122,7 +122,7 @@ function buildChangeDetectionResponse(
   return {
     agent: "change-detection",
     message:
-      "Routed to Change-Detection VLM. Comparing pre/post monsoon imagery.\n\n**Analysis:** A significant water body expansion of ~34% has been detected within the ROI. The Siamese network identified flooded regions by computing spectral divergence between T-1 (Jan 2024) and T-2 (Aug 2024) imagery. The blue overlay represents the classified flood extent polygon.",
+      "Change-Detection agent completed. Comparing pre-event and post-event multispectral imagery.\n\n**Analysis:** A water body expansion of approximately 34% has been detected within the ROI. The Siamese network identified flooded regions by computing spectral divergence between T\u2081 (Jan 2024) and T\u2082 (Aug 2024) imagery. The blue overlay on the map represents the classified flood extent polygon.",
     thinkingSteps: [],
     geoData: {
       type: "polygon",
@@ -146,7 +146,7 @@ function buildVLMResponse(): AnalysisResult {
   const terrain = terrainTypes[Math.floor(Math.random() * terrainTypes.length)];
   return {
     agent: "vlm",
-    message: `Routed to Qwen Vision-Language Model.\n\n**Terrain Analysis:** This region consists of ${terrain}.\n\nThe VLM model processed the multispectral composite (Bands 4,3,2 true color) and generated a classification report. No anomalous features or significant land-use changes were detected in the temporal window.`,
+    message: `Vision-Language agent completed.\n\n**Terrain Analysis:** This region consists of ${terrain}.\n\nThe model processed the multispectral composite (Bands 4, 3, 2 — true color) and generated a land-use classification. No anomalous features or significant land-use changes were detected within the analysis window.`,
     thinkingSteps: [],
   };
 }

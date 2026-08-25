@@ -12,19 +12,19 @@ export const AGENTS: Record<AgentType, AgentInfo> = {
     type: "object-detection",
     name: "YOLO-Geospatial",
     badge: "Object Detection",
-    description: "YOLOv8 Geospatial Model",
+    description: "YOLOv8 geospatial inference engine",
   },
   "change-detection": {
     type: "change-detection",
     name: "Siamese-VLM",
     badge: "Change Detection",
-    description: "Siamese Neural Network",
+    description: "Siamese temporal analysis network",
   },
   vlm: {
     type: "vlm",
     name: "Qwen-VL",
     badge: "Vision-Language",
-    description: "Qwen Vision-Language Model",
+    description: "Qwen vision-language model",
   },
 };
 
