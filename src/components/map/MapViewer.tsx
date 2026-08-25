@@ -45,14 +45,14 @@ function DrawController({
   const drawnItemsRef = useRef<L.FeatureGroup | null>(null);
 
   useEffect(() => {
-    const LDraw = (L as any).Draw;
-    if (!LDraw) return;
+    const LDrawControl = (L as any).Control?.Draw;
+    if (!LDrawControl) return;
 
     const drawnItems = new L.FeatureGroup();
     map.addLayer(drawnItems);
     drawnItemsRef.current = drawnItems;
 
-    const drawControl = new LDraw.Control({
+    const drawControl = new LDrawControl({
       position: "topleft",
       draw: {
         rectangle: {
@@ -76,6 +76,9 @@ function DrawController({
     });
     map.addControl(drawControl);
 
+    const CREATED = "draw:created";
+    const DELETED = "draw:deleted";
+
     const handleDrawCreated = (e: any) => {
       const layer = e.layer;
       drawnItems.clearLayers();
@@ -93,12 +96,12 @@ function DrawController({
       onBoundsChange(null);
     };
 
-    map.on(LDraw.Event.CREATED, handleDrawCreated);
-    map.on(LDraw.Event.DELETED, handleDrawDeleted);
+    map.on(CREATED, handleDrawCreated);
+    map.on(DELETED, handleDrawDeleted);
 
     return () => {
-      map.off(LDraw.Event.CREATED, handleDrawCreated);
-      map.off(LDraw.Event.DELETED, handleDrawDeleted);
+      map.off(CREATED, handleDrawCreated);
+      map.off(DELETED, handleDrawDeleted);
       map.removeControl(drawControl);
       map.removeLayer(drawnItems);
     };
