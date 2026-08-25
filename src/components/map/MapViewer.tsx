@@ -13,6 +13,7 @@ import "leaflet/dist/leaflet.css";
 import type { BoundingBox, GeoPoint, GeoPolygon } from "@/lib/satquery-types";
 
 // Fix Leaflet default icon issue
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl:
@@ -34,10 +35,9 @@ interface MapViewerProps {
 }
 
 /** Custom L.Draw-compatible control that avoids the buggy leaflet-draw plugin */
-function DrawButton({ onDrawStart, onClear, isDrawing }: {
+function DrawButton({ onDrawStart, onClear }: {
   onDrawStart: () => void;
   onClear: () => void;
-  isDrawing: boolean;
 }) {
   const map = useMap();
 
@@ -291,7 +291,6 @@ export default function MapViewer({
         <DrawButton
           onDrawStart={handleDrawStart}
           onClear={handleClear}
-          isDrawing={isDrawing}
         />
         <RectDrawLayer
           onBoundsChange={onBoundsChange}

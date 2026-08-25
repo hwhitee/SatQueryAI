@@ -1,15 +1,17 @@
 import { useState, useRef, useEffect, useCallback } from "react";
-import { Send, Bot, User, Loader2, Trash2, ChevronDown } from "lucide-react";
+import { Send, Bot, User, Loader2, Trash2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { ChatMessage, BoundingBox } from "@/lib/satquery-types";
 import { AGENTS, type AgentType } from "@/lib/satquery-types";
 import { analyzeQuery, getThinkingSteps, getAgentForQuery } from "@/lib/analyze";
 
+import type { GeoPoint, GeoPolygon } from "@/lib/satquery-types";
+
 interface ChatPanelProps {
   roiBounds: BoundingBox | null;
   onAnalysisStart: () => void;
   onAnalysisEnd: (agentName: string | null) => void;
-  onGeoDataReceived: (points: any[], polygon: any | null) => void;
+  onGeoDataReceived: (points: GeoPoint[], polygon: GeoPolygon | null) => void;
 }
 
 function ThinkingStep({ text }: { text: string }) {
@@ -123,7 +125,7 @@ export default function ChatPanel({
   onAnalysisEnd,
   onGeoDataReceived,
 }: ChatPanelProps) {
-  const [messages, setMessages] = useState<ChatMessage[]>([
+  const [messages, setMessages] = useState<ChatMessage[]>(() => [
     {
       id: "welcome",
       role: "assistant",

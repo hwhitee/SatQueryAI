@@ -1,13 +1,13 @@
+import { useState } from "react";
 import {
   Crosshair,
   Satellite,
   Radio,
   Activity,
-  Zap,
   Globe,
   Waves,
-  Signal,
 } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import type { BoundingBox, SatelliteSensor } from "@/lib/satquery-types";
 
 interface TelemetryPanelProps {
@@ -34,7 +34,7 @@ function DataRow({ label, value, mono = true }: { label: string; value: string; 
   );
 }
 
-function SectionHeader({ icon: Icon, title }: { icon: any; title: string }) {
+function SectionHeader({ icon: Icon, title }: { icon: LucideIcon; title: string }) {
   return (
     <div className="flex items-center gap-1.5 mb-2">
       <Icon className="w-3.5 h-3.5 text-cyan-500" />
@@ -54,6 +54,8 @@ export default function TelemetryPanel({
   activeAgent,
 }: TelemetryPanelProps) {
   const sensor = SENSORS[0];
+  const [sessionId] = useState(() => Date.now().toString(36).toUpperCase());
+  const [mockLatency] = useState(() => Math.floor(40 + Math.random() * 30));
 
   return (
     <div className="h-full flex flex-col gap-3 p-4 overflow-y-auto text-sm">
@@ -66,7 +68,7 @@ export default function TelemetryPanel({
           Session Telemetry
         </h2>
         <div className="text-[10px] font-mono text-slate-400 mt-0.5">
-          Session {Date.now().toString(36).toUpperCase()}
+          Session {sessionId}
         </div>
       </div>
 
@@ -157,7 +159,7 @@ export default function TelemetryPanel({
       <div className="glass-panel p-3 rounded-xl mt-auto">
         <SectionHeader icon={Activity} title="System" />
         <DataRow label="Status" value="ONLINE" />
-        <DataRow label="Latency" value={`${Math.floor(40 + Math.random() * 30)}ms`} />
+        <DataRow label="Latency" value={`${mockLatency}ms`} />
         <DataRow label="Uptime" value="99.97%" />
         <DataRow label="GPU" value="A100 x4" />
       </div>
